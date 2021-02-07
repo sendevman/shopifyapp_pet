@@ -1,20 +1,7 @@
-.CartNoticeCustomPlacement p {
-	font-size: 14px;
-	line-height: 17px;
-	color: #212B36;
+.select-theme .Polaris-Label__Text {
+	margin-bottom: 1rem;
 }
 
-.CartNoticeCustomPlacement .contant-input {
-	border: 1px solid #C4CDD5;
-	box-sizing: border-box;
-	border-radius: 3px;
-	padding: 10px;
-	font-size: 14px;
-	line-height: 17px;
-	color: #212B36;
-	width: 100%;
-}
-
-.margin-bottom {
-	margin-bottom: 2rem;
+.select-theme .Polaris-Select {
+  margin-bottom: 2rem;
 }

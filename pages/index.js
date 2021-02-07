@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { EmptyState, Layout, Page, Card, Button, Select } from '@shopify/polaris';
+import { EmptyState, Layout, Page, Card, Button, Select, TextField } from '@shopify/polaris';
 import axios from 'axios';
 import './index.css';
 
 function Index() {
-  const [selected, setSelected] = useState('today');
+  const [selected, setSelected] = useState('');
+  const [pageTitle, setPageTitle] = useState('');
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
@@ -19,12 +20,14 @@ function Index() {
   }, []);
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
+  const handlePageTitleChange = useCallback((value) => setPageTitle(value), []);
+
   const handleInstall = (themeName) => {
     options.forEach((theme) => {
       if (theme.name === themeName) {
-        axios.get('/api/pages')
+        axios.post('/api/pages', { title: pageTitle })
           .then(response => {
-            axios.post('/api/assets', { id: theme.id })
+            axios.post('/api/assets', { id: theme.id, title: pageTitle })
               .then(res => {
                 console.log('exito', res);
               }, error => {
@@ -42,10 +45,18 @@ function Index() {
       <Layout>
         <EmptyState>
           <Card
+            title="Page Info"
+            sectioned={true}
+          >
+            <div className="page-info">
+              <TextField label="Page Title" value={pageTitle} onChange={handlePageTitleChange} />
+            </div>
+          </Card>
+          <Card
             title="Select theme"
             sectioned={true}
           >
-            <div class="CartNoticeCustomPlacement">
+            <div className="select-theme">
               <Select
                 label="Select the theme to create page temlate"
                 options={options}

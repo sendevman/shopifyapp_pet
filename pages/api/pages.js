@@ -7,7 +7,7 @@ export default async(req,res) => {
   const url = 'https://' + tmp.shopOrigin + '/admin/api/2021-01/';
   const data = {
     "page": {
-      "title": "Pet Calculate",
+      "title": req.body.title,
       "body_html": `<div class='calculator-container'>\n
       <h2>How Much Exercise Does my Dog Need?</h2>\n
       <div class='select-container'>\n
@@ -63,7 +63,7 @@ export default async(req,res) => {
       border: 1px solid;\n
       }\n
       </style>`,
-      "template_suffix": 'pet-calculate'
+      "template_suffix": req.body.title.toLowerCase().replace(' ', '-')
     }
   };
   const response = await axios.post(url + 'pages.json', data, headers);

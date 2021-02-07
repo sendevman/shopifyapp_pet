@@ -7,7 +7,7 @@ export default async(req,res) => {
   const url = 'https://' + tmp.shopOrigin + '/admin/api/2021-01/themes/' + req.body.id + '/';
   const data = {
     "asset": {
-      "key": "templates/page.pet-calculate.liquid",
+      "key": `templates/page.${req.body.title.toLowerCase().replace(' ', '-')}.liquid`,
       "source_key": "templates/page.liquid"
       // "value": `
       //   <div class="page-width">\n
